@@ -1,0 +1,22 @@
+{
+  "name": "github-backup",
+  "version": "1.0.0",
+  "description": "Backup private repos from GitHub",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alleyinteractive/github-private-backup.git"
+  },
+  "author": "Matthew Boynes",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/alleyinteractive/github-private-backup/issues"
+  },
+  "homepage": "https://github.com/alleyinteractive/github-private-backup#readme",
+  "dependencies": {
+    "prompt": "^0.2.14"
+  }
+}
