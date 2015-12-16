@@ -3,7 +3,7 @@ url = require 'url'
 querystring = require 'querystring'
 
 module.exports = class GitHubSync
-	constructor: (username, password) ->
+	constructor: (username, password, @org) ->
 		@headers =
 			"Authorization": "Basic #{new Buffer(username + ":" + password).toString("base64")}"
 			"Content-Type": "application/json"
@@ -26,7 +26,7 @@ module.exports = class GitHubSync
 		  console.error "GitHub request error: #{err}"
 
 	getPrivateReposForNextPage: (callback) ->
-		@apiGet '/orgs/alleyinteractive/repos', {per_page: 100, page: @page++, type: "private"}, (response) =>
+		@apiGet "/orgs/#{@org}/repos", {per_page: 100, page: @page++, type: "private"}, (response) =>
 			data = ""
 
 			response.on "data", (chunk) =>
