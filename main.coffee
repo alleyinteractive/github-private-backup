@@ -2,7 +2,6 @@ prompt = require 'prompt'
 GitHubSync = require './lib/github-sync'
 GitBackup = require './lib/git-backup'
 
-process.chdir 'repos'
 prompt.start()
 
 prompt.get ['username', 'password'], (err, result) ->

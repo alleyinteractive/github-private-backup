@@ -1,34 +1,21 @@
-util = require 'util'
 exec = require('child_process').exec
+ShellCommand = require './shell-command'
+TarballDir = require './tarball-dir'
 
 module.exports = class GitBackup
 	constructor: (@repoList) ->
 		@dequeueBackup()
 
-	dequeueBackup: () =>
+	dequeueBackup: () ->
 		if @repoList.length
-			@runCommand util.format("git clone %s", @repoList.shift()), @dequeueBackup
+			repo = @repoList.shift()
+			ShellCommand.run "git clone --bare #{repo.url} ./repos/#{repo.name}.git", (result) =>
+				if result.success is true
+					TarballDir.run repo.name, (result) ->
+						# Nothing to see here
+				else
+					console.error "Could not clone #{repo.url}!"
+
+				@dequeueBackup()
 		else
-			console.log "No more repos to clone!"
-
-	runCommand: (command, callback) ->
-		console.log command
-		exec command, {maxBuffer: 5 * 1024 * 1024}, (err, stdout, stderr) =>
-			result =
-				stdout: stdout
-				stderr: stderr
-				err: err
-
-			# console.log err
-			console.log stdout
-			# console.log stderr
-
-			if err is null
-				result.success = true
-			else
-				console.log( "Error!" );
-				console.log( err );
-				result.success = false;
-
-			if 'function' is typeof callback
-				callback result
+			console.log "No more repos to clone"

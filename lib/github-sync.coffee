@@ -37,7 +37,7 @@ module.exports = class GitHubSync
 					when 200
 						newRepos = JSON.parse data
 						for repo in newRepos
-							@repos.push repo.ssh_url
+							@repos.push name: repo.name, url: repo.ssh_url
 
 						if newRepos.length is 100
 							@getPrivateReposForNextPage callback
