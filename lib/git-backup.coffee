@@ -9,7 +9,7 @@ module.exports = class GitBackup
 	dequeueBackup: () ->
 		if @repoList.length
 			repo = @repoList.shift()
-			ShellCommand.run "git clone --bare #{repo.url} ./repos/#{repo.name}.git", (result) =>
+			ShellCommand.run "git clone --bare #{repo.url} /tmp/#{repo.name}.git", (result) =>
 				if result.success is true
 					TarballDir.run repo.name, (result) ->
 						# Nothing to see here
