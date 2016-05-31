@@ -15,4 +15,4 @@ Node and CoffeeScript
   coffee main.coffee
    ```
    
-2. Enter your organization, username, and password at the prompts. If you use 2fa in GitHub, you'll need to generate and use an application password.
+2. Enter your organization, username, and password at the prompts. If you use 2fa in GitHub, you'll need to generate and use an application password (application will need repo scope)
